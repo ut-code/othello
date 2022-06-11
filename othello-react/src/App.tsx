@@ -17,164 +17,162 @@ function initialize(used_map,flag){
       [0,0,0,0,0,0,0,0,0,0]
   ];
 }
-function reverse_up(pos_x, pos_y, color,othello_map,used_map,flag,opposite_color){
-  used_map[pos_x][pos_y] = 1;
-  opposite_color = 1;
-  if(color == 1) opposite_color = 2;
-
-  if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
-  else if(othello_map[pos_x][pos_y] == color){
-      flag = 1;
-      return;
-  }
-  if(pos_x >= 1 && used_map[pos_x-1][pos_y] == 0){
-      reverse_up(pos_x-1, pos_y, color,othello_map,used_map,flag,opposite_color);
-  }
-  if(pos_x >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1){
-      othello_map[pos_x][pos_y] = color;
-  }
+function reverse_up(pos_x, pos_y, color,othello_map,opposite_color){
+  const old = othello_map.map(row => row.slice());
+  opposite_color=color*(-1);
+  for(;;){
+    if(othello_map[pos_x][pos_y]==opposite_color){
+      othello_map[pos_x][pos_y]=color;
+    }
+    else if(othello_map[pos_x][pos_y]==color){
+      return othello_map;
+    }
+    else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
+      othello_map=old;
+      return othello_map;
+    }
+    pos_x-=1;
+  } 
+  
 }
-function reverse_down(pos_x, pos_y, color,othello_map,used_map,flag,opposite_color){
-  used_map[pos_x][pos_y] = 1;
-  if(color == 1) opposite_color = 2;
-
-  if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
-  else if(othello_map[pos_x][pos_y] == color){
-      flag = 1;
-      return;
-  }
-  if(pos_x <= 8 && used_map[pos_x+1][pos_y] == 0){
-      reverse_down(pos_x+1, pos_y, color,othello_map,used_map,flag,opposite_color);
-  }
-  if(pos_x <= 8 && used_map[pos_x][pos_y] == 1 && flag == 1){
-      othello_map[pos_x][pos_y] = color;
-  }
+function reverse_down(pos_x, pos_y, color,othello_map,opposite_color){
+  const old = othello_map.map(row => row.slice());
+  opposite_color=color*(-1);
+  for(;;){
+    if(othello_map[pos_x][pos_y]==opposite_color){
+      othello_map[pos_x][pos_y]=color;
+    }
+    else if(othello_map[pos_x][pos_y]==color){
+      return othello_map;
+    }
+    else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
+      othello_map=old;
+      return othello_map;
+    }
+    pos_x+=1;
+  } 
 }
-function reverse_right(pos_x, pos_y, color,othello_map,used_map,flag,opposite_color){
-  used_map[pos_x][pos_y] = 1;
-  opposite_color = 1;
-  if(color == 1) opposite_color = 2;
-
-  if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
-  else if(othello_map[pos_x][pos_y] == color){
-      flag = 1;
-      return;
-  }
-  if(pos_y <= 8 && used_map[pos_x][pos_y+1] == 0){
-      reverse_right(pos_x, pos_y+1, color,othello_map,used_map,flag,opposite_color);
-  }
-  if(pos_y <= 8 && used_map[pos_x][pos_y] == 1 && flag == 1){
-      othello_map[pos_x][pos_y] = color;
-  }
+function reverse_right(pos_x, pos_y, color,othello_map,opposite_color){
+  const old = othello_map.map(row => row.slice());
+  opposite_color=color*(-1);
+  for(;;){
+    if(othello_map[pos_x][pos_y]==opposite_color){
+      othello_map[pos_x][pos_y]=color;
+    }
+    else if(othello_map[pos_x][pos_y]==color){
+      return othello_map;
+    }
+    else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
+      othello_map=old;
+      return othello_map;
+    }
+    pos_y+=1;
+  } 
 }
-function reverse_left(pos_x, pos_y, color,othello_map,used_map,flag,opposite_color){
-  used_map[pos_x][pos_y] = 1;
-  opposite_color = 1;
-  if(color == 1) opposite_color = 2;
-
-  if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
-  else if(othello_map[pos_x][pos_y] == color){
-      flag = 1;
-      return;
-  }
-  if(pos_y >= 1 && used_map[pos_x][pos_y-1] == 0){
-      reverse_left(pos_x, pos_y-1, color,othello_map,used_map,flag,opposite_color);
-  }
-  if(pos_y >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1){
-      othello_map[pos_x][pos_y] = color;
-  }
-}
-
-function reverse_up_right(pos_x, pos_y, color,othello_map,used_map,flag,opposite_color){
-  used_map[pos_x][pos_y] = 1;
-  opposite_color = 1;
-  if(color == 1) opposite_color = 2;
-
-  if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
-  else if(othello_map[pos_x][pos_y] == color){
-      flag = 1;
-      return;
-  }
-  if(pos_x >= 1 && pos_y <= 8 && used_map[pos_x - 1][pos_y + 1] == 0){
-      reverse_up_right(pos_x - 1, pos_y + 1, color,othello_map,used_map,flag,opposite_color);
-  }
-  if(pos_x >= 1 && pos_y <= 8 && used_map[pos_x][pos_y] == 1 && flag == 1){
-      othello_map[pos_x][pos_y] = color;
-  }
+function reverse_left(pos_x, pos_y, color,othello_map,opposite_color){
+  const old = othello_map.map(row => row.slice());
+  opposite_color=color*(-1);
+  for(;;){
+    if(othello_map[pos_x][pos_y]==opposite_color){
+      othello_map[pos_x][pos_y]=color;
+    }
+    else if(othello_map[pos_x][pos_y]==color){
+      return othello_map;
+    }
+    else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
+      othello_map=old;
+      return othello_map;
+    }
+    pos_y-=1;
+  } 
 }
 
-function reverse_up_left(pos_x, pos_y, color,othello_map,used_map,flag,opposite_color){
-  used_map[pos_x][pos_y] = 1;
-  opposite_color = 1;
-  if(color == 1) opposite_color = 2;
-
-  if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
-  else if(othello_map[pos_x][pos_y] == color){
-      flag = 1;
-      return;
-  }
-  if(pos_x >= 1 && pos_y >= 1 && used_map[pos_x - 1][pos_y - 1] == 0){
-      reverse_up_left(pos_x - 1, pos_y - 1, color,othello_map,used_map,flag,opposite_color);
-  }
-  if(pos_x >= 1 && pos_y >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1){
-      othello_map[pos_x][pos_y] = color;
-  }
+function reverse_up_right(pos_x, pos_y, color,othello_map,opposite_color){
+  const old = othello_map.map(row => row.slice());
+  opposite_color=color*(-1);
+  for(;;){
+    if(othello_map[pos_x][pos_y]==opposite_color){
+      othello_map[pos_x][pos_y]=color;
+    }
+    else if(othello_map[pos_x][pos_y]==color){
+      return othello_map;
+    }
+    else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
+      othello_map=old;
+      return othello_map;
+    }
+    pos_x-=1;
+    pos_y+=1;
+  } 
 }
 
-function reverse_down_left(pos_x, pos_y, color,othello_map,used_map,flag,opposite_color){
-  used_map[pos_x][pos_y] = 1;
-  opposite_color = 1;
-  if(color == 1) opposite_color = 2;
-
-  if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
-  else if(othello_map[pos_x][pos_y] == color){
-      flag = 1;
-      return;
-  }
-  if(pos_x <= 8 && pos_y >= 1 && used_map[pos_x + 1][pos_y - 1] == 0){
-      reverse_down_left(pos_x + 1, pos_y - 1, color,othello_map,used_map,flag,opposite_color);
-  }
-  if(pos_x <= 8 && pos_y >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1){
-      othello_map[pos_x][pos_y] = color;
-  }
+function reverse_up_left(pos_x, pos_y, color,othello_map,opposite_color){
+  const old = othello_map.map(row => row.slice());
+  opposite_color=color*(-1);
+  for(;;){
+    if(othello_map[pos_x][pos_y]==opposite_color){
+      othello_map[pos_x][pos_y]=color;
+    }
+    else if(othello_map[pos_x][pos_y]==color){
+      return othello_map;
+    }
+    else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
+      othello_map=old;
+      return othello_map;
+    }
+    pos_x-=1;
+    pos_y-=1;
+  } 
 }
 
-function reverse_down_right(pos_x, pos_y, color,othello_map,used_map,flag,opposite_color){
-  used_map[pos_x][pos_y] = 1;
-  opposite_color = 1;
-  if(color == 1) opposite_color = 2;
-
-  if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
-  else if(othello_map[pos_x][pos_y] == color){
-      flag = 1;
-      return;
-  }
-  if(pos_x <= 8 && pos_y <= 8 && used_map[pos_x + 1][pos_y + 1] == 0){
-      reverse_down_right(pos_x + 1, pos_y + 1, othello_map,used_map,flag,color,opposite_color);
-  }
-  if(pos_x <= 8 && pos_y <= 8 && used_map[pos_x][pos_y] == 1 && flag == 1){
-      othello_map[pos_x][pos_y] = color;
-  }
+function reverse_down_left(pos_x, pos_y, color,othello_map,opposite_color){
+  const old = othello_map.map(row => row.slice());
+  opposite_color=color*(-1);
+  for(;;){
+    if(othello_map[pos_x][pos_y]==opposite_color){
+      othello_map[pos_x][pos_y]=color;
+    }
+    else if(othello_map[pos_x][pos_y]==color){
+      return othello_map;
+    }
+    else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
+      othello_map=old;
+      return othello_map;
+    }
+    pos_x+=1;
+    pos_y-=1;
+  } 
 }
 
-function common_reversing(pos_x:number, pos_y:number, color:number,othello_map,used_map,flag,opposite_color){
+function reverse_down_right(pos_x:number, pos_y:number, color:number,othello_map,opposite_color){
+  const old = othello_map.map(row => row.slice());
+  opposite_color=color*(-1);
+  for(;;){
+    if(othello_map[pos_x][pos_y]==opposite_color){
+      othello_map[pos_x][pos_y]=color;
+    }
+    else if(othello_map[pos_x][pos_y]==color){
+      return othello_map;
+    }
+    else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
+      othello_map=old;
+      return othello_map;
+    }
+    pos_x+=1;
+    pos_y+=1;
+  } 
+}
+
+function common_reversing(pos_x:number, pos_y:number, color:number,othello_map,opposite_color){
   othello_map[pos_x][pos_y] = color;
-  initialize(used_map,flag);
-  reverse_up(pos_x - 1, pos_y, color,othello_map,used_map,flag,opposite_color); 
-  initialize(used_map,flag);
-  reverse_down(pos_x + 1, pos_y, color,othello_map,used_map,flag,opposite_color);
-  initialize(used_map,flag);
-  reverse_right(pos_x, pos_y + 1, color,othello_map,used_map,flag,opposite_color);
-  initialize(used_map,flag);
-  reverse_left(pos_x, pos_y - 1, color,othello_map,used_map,flag,opposite_color);
-  initialize(used_map,flag);
-  reverse_up_right(pos_x - 1, pos_y + 1, color,othello_map,used_map,flag,opposite_color); 
-  initialize(used_map,flag);
-  reverse_down_right(pos_x + 1, pos_y + 1, color,othello_map,used_map,flag,opposite_color);
-  initialize(used_map,flag);
-  reverse_down_left(pos_x + 1, pos_y - 1, color,othello_map,used_map,flag,opposite_color);
-  initialize(used_map,flag);
-  reverse_up_left(pos_x - 1, pos_y - 1, color,othello_map,used_map,flag,opposite_color);
+  othello_map=reverse_up(pos_x - 1, pos_y, color,othello_map,opposite_color); 
+  othello_map=reverse_down(pos_x + 1, pos_y, color,othello_map,opposite_color);
+  othello_map=reverse_right(pos_x, pos_y + 1, color,othello_map,opposite_color);
+  othello_map=reverse_left(pos_x, pos_y - 1, color,othello_map,opposite_color);
+  othello_map=reverse_up_right(pos_x - 1, pos_y + 1, color,othello_map,opposite_color); 
+  othello_map=reverse_down_right(pos_x + 1, pos_y + 1, color,othello_map,opposite_color);
+  othello_map=reverse_down_left(pos_x + 1, pos_y - 1, color,othello_map,opposite_color);
+  othello_map=reverse_up_left(pos_x - 1, pos_y - 1, color,othello_map,opposite_color);
   return othello_map;
 }
 
@@ -184,8 +182,8 @@ export default function App() {
     [3,0,0,0,0,0,0,0,0,3],
     [3,0,0,0,0,0,0,0,0,3],
     [3,0,0,0,0,0,0,0,0,3],
-    [3,0,0,0,1,2,0,0,0,3],
-    [3,0,0,0,2,1,0,0,0,3],
+    [3,0,0,0,1,-1,0,0,0,3],
+    [3,0,0,0,-1,1,0,0,0,3],
     [3,0,0,0,0,0,0,0,0,3],
     [3,0,0,0,0,0,0,0,0,3],
     [3,0,0,0,0,0,0,0,0,3],
@@ -205,8 +203,9 @@ export default function App() {
     [0,0,0,0,0,0,0,0,0,0]
   ]);
   
-  const [flag,setFlag]=useState()
-  const [opposite_color,setOpposite]=useState()
+  const [flag,setFlag]=useState();
+  const [opposite_color,setOpposite]=useState(1);
+  const [color,setColor]=useState(1);
   return (
     <>
       <div className="title"><h1>無料オンラインオセロゲーム</h1></div>
@@ -247,9 +246,12 @@ export default function App() {
                     <td><button className="othellobutton" type="button" onClick={() => {
                       const old = board.map(row => row.slice());
                       const used=used_board.map(row => row.slice());
+                      const copied_color=color;
                       console.log("Hey!");
-                      const newBoard = common_reversing(index,subIndex,subItem,old,used,flag,opposite_color);
+                      const newBoard = common_reversing(index,subIndex,color,old,used,flag,opposite_color);
+                      console.log(newBoard);
                       setBoard(newBoard);
+                      setColor(copied_color*(-1));
                     }}>{subItem}</button></td>
                   )
                 })}
