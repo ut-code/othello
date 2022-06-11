@@ -1,8 +1,27 @@
 import { useState } from "react";
-
+import './App.css';
 
 export default function App() {
-  
+  const a=[
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0]
+  ]
+  let b=[
+    [,,,,,,,],
+    [,,,,,,,],
+    [,,,,,,,],
+    [,,,,,,,],
+    [,,,,,,,],
+    [,,,,,,,],
+    [,,,,,,,],
+    [,,,,,,,]
+  ]
   return (
     <>
       <div className="title"><h1>無料オンラインオセロゲーム</h1></div>
@@ -16,11 +35,22 @@ export default function App() {
         </p>
       </div>
 
-      <table>
+      <table className="board">
         <tbody>
-          
+          {a.map((item, index) => {
+            return (
+              <tr>
+                {item.map((subItem,subIndex) => {
+                  return(
+                    <td><button>{subItem}</button></td>
+                  )
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
+
     </>
   );
 }
