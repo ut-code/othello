@@ -209,6 +209,10 @@ function common_reversing(pos_x, pos_y, color){
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("static"));
 
+app.get("/get", (request, response) => {
+    response.json([othello_map, color]);
+});
+
 app.get("/put", (request, response) => {
     const position = request.query.position;
     const pos_x = position%10;
@@ -219,7 +223,7 @@ app.get("/put", (request, response) => {
     }else{
         color = 1;
     }
-    response.send(othello_map);
+    response.json([othello_map, color]);
 });
 app.listen(3000);
 
