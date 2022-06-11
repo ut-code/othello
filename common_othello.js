@@ -178,7 +178,7 @@ function reverse_down_right(pos_x, pos_y, color){
     }
 }
 
-function reversing(pos_x, pos_y, color){
+function common_reversing(pos_x, pos_y, color){
     othello_map[pos_x][pos_y] = color;
     initialize();
     reverse_up(pos_x - 1, pos_y, color); 
@@ -196,4 +196,5 @@ function reversing(pos_x, pos_y, color){
     reverse_down_left(pos_x + 1, pos_y - 1, color);
     initialize();
     reverse_up_left(pos_x - 1, pos_y - 1, color);
+    return othello_map;
 }
