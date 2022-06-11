@@ -225,7 +225,7 @@ function circular_left(pos, color){
         othello_map[next_x][next_y] = color;
     }
 }
-function reversing(pos_x, pos_y, color){
+function circle_reversing(pos_x, pos_y, color){
     othello_map[pos_x][pos_y] = color;
     let num = -1;
     for(let i = 0;i < 20;i++){
@@ -261,4 +261,5 @@ function reversing(pos_x, pos_y, color){
     reverse_down_left(pos_x + 1, pos_y - 1, color);
     initialize();
     reverse_up_left(pos_x - 1, pos_y - 1, color);
+    return othello_map;
 }
