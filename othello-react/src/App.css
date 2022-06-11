@@ -27,6 +27,12 @@ div.main {
   height: 70px;
   background-color: #80aba9;
   text-align: center;
-  font-size: 3.8vw;
   cursor: pointer;
+}
+.othellobutton {
+  width: 70px;
+  height:70px;
+  background-color: #80aba9;
+  font-size: 3.8vw;
+  text-align: center;
 }
