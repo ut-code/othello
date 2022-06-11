@@ -262,5 +262,3 @@ function reversing(pos_x, pos_y, color){
     initialize();
     reverse_up_left(pos_x - 1, pos_y - 1, color);
 }
-reversing(1, 6, 2);
-console.log(othello_map);

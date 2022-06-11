@@ -197,10 +197,3 @@ function reversing(pos_x, pos_y, color){
     initialize();
     reverse_up_left(pos_x - 1, pos_y - 1, color);
 }
-reversing(6, 4, 1);
-reversing(4, 3, 2);
-reversing(3, 3, 1);
-reversing(6, 5, 2);
-reversing(6, 6, 1);
-reversing(7, 5, 2);
-console.log(othello_map);
