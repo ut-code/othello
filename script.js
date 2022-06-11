@@ -192,4 +192,3 @@ function right_down(othello_map, turn, i, j){
 }
 
 const putable = check_putable(othello_map, 1);
-console.log(putable)
