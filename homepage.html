@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Othello</title>
+    <style>
+        body{
+            background-color: #2c4f54;
+        }
+        div.title {
+            color:white;
+        }
+        div.main {
+            position: relative;
+            margin-left: 300px;
+            margin-right: 300px;
+            background-color: white;
+            width:800px;
+            color:black;
+            padding:10px;
+            border-radius: 10px;
+        }
+        .board {
+            position:relative;
+            margin-left: 400px;
+            margin-right: 400px;
+        }
+        .board td {
+            width: 70px;
+            height: 70px;
+            background-color: #80aba9;
+            text-align: center;
+            font-size: 3.8vw;
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="title" align="center"><h1><font size=7>無料オンラインオセロゲーム</font></h1></div>
+    <div class="main">
+    <p ><font size=4>これは無料でオンライン上の世界の人々と自由にオセロの対戦を楽しむことのできるサイトです。</font></p>
+    <p><font size=4>遊び方</font>
+        <ul>
+            <li><font size=4>自分の手番になったらマス目をクリックして、相手の駒を挟みましょう</font>
+            <li><font size=4>もし、駒をおける場所がなくなったら、"パス"ボタンを押して相手に手番を譲りましょう</font>
+        </ul>
+    </p>
+    </div>
+    <p>
+    <table class="board" id=>
+        <tr>
+            <td id="11"></td>
+            <td id="12"></td>
+            <td id="13"></td>
+            <td id="14"></td>
+            <td id="15"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>●</td>
+            <td>○</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>○</td>
+            <td>●</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    </p>
+    </div>
+    <script src="./script.js"></script>
+
+  </body>
+</html>
