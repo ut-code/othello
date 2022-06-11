@@ -21,7 +21,8 @@ let used_map = [
     [0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0]
-]
+];
+let flag = 0;
 function initialize(){
     flag = 0;
     used_map = [
