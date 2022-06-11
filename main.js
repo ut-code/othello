@@ -18,7 +18,7 @@ app.post("/put", (request, response) => {
     }else{
         color = 1;
     }
-    response.send([othello_map,color]);
+    response.json([othello_map,color]);
 });
 
 let othello_map = [
