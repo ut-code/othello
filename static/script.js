@@ -18,8 +18,32 @@ async function get(putting, pass) {
     if(pass===true){
         const response = await fetch(`/pass`);
     }
-    if(turn === 64){
+    let black = 0;
+    let white = 0;
+    for(let i=1; i<9; i++){
+        for(let j =1; j<9; j++){
+            if(othello_map[i][j]===1){
+                black++;
+            }else if(othello_map[i][j]===2){
+                white++;
+            }
+        }
+    }
+    if(white===0){
         clearInterval(putting);
+        alert("黒の勝ちです")
+    }else if(black===0){
+        clearInterval(putting);
+        alert("白の勝ちです")
+    }else if(turn === 60){
+        clearInterval(putting);
+        if(black>white){
+            alert("黒の勝ちです")
+        }else if(black<white){
+            alert("白の勝ちです")
+        }else{
+            alert("引き分けです")
+        }
     }
 }
 //おく処理
@@ -41,6 +65,7 @@ async function put(putting) {
             }
         }
     }
+    console.log(turn);
 }
 let button=[]
 for(let i=0; i<8; i++){
