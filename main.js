@@ -338,6 +338,8 @@ app.get("/pass", (request, response) => {
     }else {
         color = 1;
     }
+    console.log(color)
+    response.send("a")
 });
 
 app.get("/reset", (request, response) => {
