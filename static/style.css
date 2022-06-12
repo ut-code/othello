@@ -46,3 +46,58 @@ div.main {
     text-align: center;
     cursor: pointer;
 }
+.allboard {
+    display: block;
+    width: 560px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+.normalboard {
+    display: block;
+    width: 560px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+.normalboard td {
+    width: 70px;
+    height: 70px;
+    background-color: #80aba9;
+    text-align: center;
+    cursor: pointer;
+}
+.strangeboard {
+    display: block;
+    width: 280px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+.strangeboard td {
+    width: 70px;
+    height: 70px;
+    background-color: #80aba9;
+    text-align: center;
+    cursor: pointer;
+}
+.strangeboard2 {
+    display: block;
+    width: 420px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+.strangeboard2 td {
+    width: 70px;
+    height: 70px;
+    background-color: #80aba9;
+    text-align: center;
+    cursor: pointer;
+}
