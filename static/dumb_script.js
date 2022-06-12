@@ -46,7 +46,7 @@ async function get(pass) {
         clearInterval(loop)
         alert("白の勝ちです")
         finish=true;
-    }else if(turn === 60){
+    }else if(turn === 48){
         clearInterval(loop)
         if(black>white){
             alert("黒の勝ちです")
