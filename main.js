@@ -357,7 +357,7 @@ app.get("/reset", (request, response) => {
             [3,3,3,3,3,3,3,3,3,3]
         ];
         response.send("a");
-    },1000)
+    },60000)
 })
 app.listen(3000);
 

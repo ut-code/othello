@@ -146,7 +146,7 @@ const main=async() =>{
     }
     let putting = setInterval(function(){
         put(putting)
-    },500)
+    },10000)
 }
 main()
 
