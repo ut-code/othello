@@ -1,0 +1,41 @@
+body{
+    background-color: #2c4f54;
+  }
+  div.title {
+    position: relative;
+    margin-left: 500px;
+    margin-right: 500px;
+    color:white;
+  }
+  div.main {
+    position: relative;
+    margin-left: 300px;
+    margin-right: 300px;
+    background-color: white;
+    width:800px;
+    color:black;
+    padding:10px;
+    border-radius: 10px;
+  }
+  .board {
+    position:relative;
+    margin-left: 400px;
+    margin-right: 400px;
+  }
+  .board td {
+    width: 70px;
+    height: 70px;
+    background-color: #80aba9;
+    text-align: center;
+    cursor: pointer;
+  }
+  .othellobutton {
+    width: 70px;
+    height:70px;
+    font-size: 3.8vw;
+    text-align: center;
+    background-color: #80aba9;
+  }
+  .siromaru{
+    color: aliceblue;
+  }
