@@ -305,7 +305,7 @@ app.get("/put", (request, response) => {
     const position = request.query.position;
     const pos_x = position % 10;
     const pos_y = Math.floor(position/10);
-    othello_map = circle_reversing(pos_x, pos_y, color);
+    othello_map = common_reversing(pos_x, pos_y, color);
     if(color == 1){
         color = 2;
     }else {
@@ -337,21 +337,6 @@ app.get("/pass", (request, response) => {
 });
 
 app.get("/reset", (request, response) => {
-    setTimeout(function(){
-        turn=0;
-        othello_map = [
-            [3,3,3,3,3,3,3,3,3,3],
-            [3,0,0,0,0,0,0,0,0,3],
-            [3,0,0,0,0,0,0,0,0,3],
-            [3,0,0,0,0,0,0,0,0,3],
-            [3,0,0,0,1,2,0,0,0,3],
-            [3,0,0,0,2,1,0,0,0,3],
-            [3,0,0,0,0,0,0,0,0,3],
-            [3,0,0,0,0,0,0,0,0,3],
-            [3,0,0,0,0,0,0,0,0,3],
-            [3,3,3,3,3,3,3,3,3,3]
-        ];
-        response.send("a");
-    },60000)
+    response.send("a");
 })
 app.listen(process.env.PORT || 3000);
