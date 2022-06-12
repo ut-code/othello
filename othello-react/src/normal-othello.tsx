@@ -2,178 +2,218 @@ import { useState } from "react";
 import './App.css';
 
 
-function initialize(used_map,flag){
-  flag = 0;
-  used_map = [
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0,0]
-  ];
-}
-function reverse_up(pos_x, pos_y, color,othello_map,opposite_color){
+function reverse_up(pos_x:number, pos_y:number, color:number,othello_map,opposite_color:number,i:number){
   const old = othello_map.map(row => row.slice());
   opposite_color=color*(-1);
+  if(othello_map[pos_x][pos_y]==color){
+    i+=1;
+    return [i,othello_map];
+  }
   for(;;){
     if(othello_map[pos_x][pos_y]==opposite_color){
       othello_map[pos_x][pos_y]=color;
     }
     else if(othello_map[pos_x][pos_y]==color){
-      return othello_map;
+      return [i,othello_map];
     }
     else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
       othello_map=old;
-      return othello_map;
+      i+=1;
+      return [i,othello_map];
     }
     pos_x-=1;
   } 
   
 }
-function reverse_down(pos_x, pos_y, color,othello_map,opposite_color){
+function reverse_down(pos_x:number, pos_y:number, color:number,othello_map,opposite_color:number,i:number){
   const old = othello_map.map(row => row.slice());
   opposite_color=color*(-1);
+  if(othello_map[pos_x][pos_y]==color){
+    i+=1;
+    return [i,othello_map];
+  }
   for(;;){
     if(othello_map[pos_x][pos_y]==opposite_color){
       othello_map[pos_x][pos_y]=color;
     }
     else if(othello_map[pos_x][pos_y]==color){
-      return othello_map;
+      return [i,othello_map];
     }
     else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
       othello_map=old;
-      return othello_map;
+      i+=1;
+      return [i,othello_map];
     }
     pos_x+=1;
   } 
 }
-function reverse_right(pos_x, pos_y, color,othello_map,opposite_color){
+function reverse_right(pos_x:number, pos_y:number, color:number,othello_map,opposite_color:number,i:number){
   const old = othello_map.map(row => row.slice());
   opposite_color=color*(-1);
+  if(othello_map[pos_x][pos_y]==color){
+    i+=1;
+    return [i,othello_map];
+  }
   for(;;){
     if(othello_map[pos_x][pos_y]==opposite_color){
       othello_map[pos_x][pos_y]=color;
     }
     else if(othello_map[pos_x][pos_y]==color){
-      return othello_map;
+      return [i,othello_map];
     }
     else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
       othello_map=old;
-      return othello_map;
+      i+=1;
+      return [i,othello_map];
     }
     pos_y+=1;
   } 
 }
-function reverse_left(pos_x, pos_y, color,othello_map,opposite_color){
+function reverse_left(pos_x:number, pos_y:number, color:number,othello_map,opposite_color:number,i:number){
   const old = othello_map.map(row => row.slice());
   opposite_color=color*(-1);
+  if(othello_map[pos_x][pos_y]==color){
+    i+=1;
+    return [i,othello_map];
+  }
   for(;;){
     if(othello_map[pos_x][pos_y]==opposite_color){
       othello_map[pos_x][pos_y]=color;
     }
     else if(othello_map[pos_x][pos_y]==color){
-      return othello_map;
+      return [i,othello_map];
     }
     else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
       othello_map=old;
-      return othello_map;
+      i+=1;
+      return [i,othello_map];
     }
     pos_y-=1;
   } 
 }
 
-function reverse_up_right(pos_x, pos_y, color,othello_map,opposite_color){
+function reverse_up_right(pos_x:number, pos_y:number, color:number,othello_map,opposite_color:number,i:number){
   const old = othello_map.map(row => row.slice());
   opposite_color=color*(-1);
+  if(othello_map[pos_x][pos_y]==color){
+    i+=1;
+    return [i,othello_map];
+  }
   for(;;){
     if(othello_map[pos_x][pos_y]==opposite_color){
       othello_map[pos_x][pos_y]=color;
     }
     else if(othello_map[pos_x][pos_y]==color){
-      return othello_map;
+      return [i,othello_map];
     }
     else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
       othello_map=old;
-      return othello_map;
+      i+=1;
+      return [i,othello_map];
     }
     pos_x-=1;
     pos_y+=1;
   } 
 }
 
-function reverse_up_left(pos_x, pos_y, color,othello_map,opposite_color){
+function reverse_up_left(pos_x:number, pos_y:number, color:number,othello_map,opposite_color:number,i:number){
   const old = othello_map.map(row => row.slice());
   opposite_color=color*(-1);
+  if(othello_map[pos_x][pos_y]==color){
+    i+=1;
+    return [i,othello_map];
+  }
   for(;;){
     if(othello_map[pos_x][pos_y]==opposite_color){
       othello_map[pos_x][pos_y]=color;
     }
     else if(othello_map[pos_x][pos_y]==color){
-      return othello_map;
+      return [i,othello_map];
     }
     else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
       othello_map=old;
-      return othello_map;
+      i+=1;
+      return [i,othello_map];
     }
     pos_x-=1;
     pos_y-=1;
   } 
 }
 
-function reverse_down_left(pos_x, pos_y, color,othello_map,opposite_color){
+function reverse_down_left(pos_x:number, pos_y:number, color:number,othello_map,opposite_color:number,i:number){
   const old = othello_map.map(row => row.slice());
   opposite_color=color*(-1);
+  if(othello_map[pos_x][pos_y]==color){
+    i+=1;
+    return [i,othello_map];
+  }  
   for(;;){
     if(othello_map[pos_x][pos_y]==opposite_color){
       othello_map[pos_x][pos_y]=color;
     }
     else if(othello_map[pos_x][pos_y]==color){
-      return othello_map;
+      return [i,othello_map];
     }
     else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
       othello_map=old;
-      return othello_map;
+      i+=1;
+      return [i,othello_map];
     }
     pos_x+=1;
     pos_y-=1;
   } 
 }
 
-function reverse_down_right(pos_x:number, pos_y:number, color:number,othello_map,opposite_color){
+function reverse_down_right(pos_x:number, pos_y:number, color:number,othello_map,opposite_color:number,i:number){
   const old = othello_map.map(row => row.slice());
   opposite_color=color*(-1);
+  if(othello_map[pos_x][pos_y]==color){
+    i+=1;
+    return [i,othello_map];
+  }
   for(;;){
     if(othello_map[pos_x][pos_y]==opposite_color){
       othello_map[pos_x][pos_y]=color;
     }
     else if(othello_map[pos_x][pos_y]==color){
-      return othello_map;
+      return [i,othello_map];
     }
     else if(othello_map[pos_x][pos_y]==0||othello_map[pos_x][pos_y]==3){
       othello_map=old;
-      return othello_map;
+      i+=1;
+      return [i,othello_map];
     }
     pos_x+=1;
     pos_y+=1;
   } 
 }
 
-function common_reversing(pos_x:number, pos_y:number, color:number,othello_map,opposite_color){
-  othello_map[pos_x][pos_y] = color;
-  othello_map=reverse_up(pos_x - 1, pos_y, color,othello_map,opposite_color); 
-  othello_map=reverse_down(pos_x + 1, pos_y, color,othello_map,opposite_color);
-  othello_map=reverse_right(pos_x, pos_y + 1, color,othello_map,opposite_color);
-  othello_map=reverse_left(pos_x, pos_y - 1, color,othello_map,opposite_color);
-  othello_map=reverse_up_right(pos_x - 1, pos_y + 1, color,othello_map,opposite_color); 
-  othello_map=reverse_down_right(pos_x + 1, pos_y + 1, color,othello_map,opposite_color);
-  othello_map=reverse_down_left(pos_x + 1, pos_y - 1, color,othello_map,opposite_color);
-  othello_map=reverse_up_left(pos_x - 1, pos_y - 1, color,othello_map,opposite_color);
-  return othello_map;
+function common_reversing(pos_x:number, pos_y:number, color:number,othello_map,opposite_color,i){
+  const old=othello_map.map(row => row.slice());
+  if(othello_map[pos_x][pos_y]==0){
+    othello_map[pos_x][pos_y] = color;
+    console.log(i);
+    [i,othello_map]=reverse_up(pos_x - 1, pos_y, color,othello_map,opposite_color,i); 
+    [i,othello_map]=reverse_down(pos_x + 1, pos_y, color,othello_map,opposite_color,i);
+    [i,othello_map]=reverse_right(pos_x, pos_y + 1, color,othello_map,opposite_color,i);
+    [i,othello_map]=reverse_left(pos_x, pos_y - 1, color,othello_map,opposite_color,i);
+    [i,othello_map]=reverse_up_right(pos_x - 1, pos_y + 1, color,othello_map,opposite_color,i); 
+    [i,othello_map]=reverse_down_right(pos_x + 1, pos_y + 1, color,othello_map,opposite_color,i);
+    [i,othello_map]=reverse_down_left(pos_x + 1, pos_y - 1, color,othello_map,opposite_color,i);
+    [i,othello_map]=reverse_up_left(pos_x - 1, pos_y - 1, color,othello_map,opposite_color,i);
+    console.log(i);
+    if(i==8){
+      othello_map=old;
+    }
+    else{
+      color*=-1;
+    }
+    i=0;
+    return [color,othello_map];
+  }
+  else{
+    return [color,othello_map];
+  }
 }
 
 export default function App() {
@@ -203,9 +243,9 @@ export default function App() {
     [0,0,0,0,0,0,0,0,0,0]
   ]);
   
-  const [flag,setFlag]=useState();
   const [opposite_color,setOpposite]=useState(1);
   const [color,setColor]=useState(1);
+  const [i,setI]=useState(0);
   return (
     <>
       <div className="title"><h1>無料オンラインオセロゲーム</h1></div>
@@ -235,7 +275,7 @@ export default function App() {
           </ul>
         </p>
       </div>
-
+      <p>{color}の手番です</p>
       <table className="board">
         <tbody>
           {board.map((item, index) => {
@@ -248,10 +288,11 @@ export default function App() {
                       const used=used_board.map(row => row.slice());
                       const copied_color=color;
                       console.log("Hey!");
-                      const newBoard = common_reversing(index,subIndex,color,old,used,flag,opposite_color);
+                      const [newcolor,newBoard] = common_reversing(index,subIndex,color,old,opposite_color,i);
                       console.log(newBoard);
+                      setI(0);
                       setBoard(newBoard);
-                      setColor(copied_color*(-1));
+                      setColor(newcolor);
                     }}>{subItem}</button></td>
                   )
                 })}
