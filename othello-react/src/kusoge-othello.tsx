@@ -326,9 +326,9 @@ export default function App() {
   const [i,setI]=useState(0);
   const [block_id,setId]=useState(Number);
   const [block,setBlock]=useState([
-    [["🔴","\n"],["\n","\n"]],
-    [["●","\n"],["🔴","\n"]],
-    [["●","●"],["🔴","\n"]]
+    [["●","\n"],["\n","\n"]],
+    [["●","\n"],["●","\n"]],
+    [["●","●"],["●","\n"]]
   ])
   const [string_board,setString]=useState<string[][]>([])
   return (
