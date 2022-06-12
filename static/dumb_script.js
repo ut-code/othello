@@ -1,4 +1,4 @@
-async function get(putting, pass) {
+async function get(pass) {
     const response = await fetch(`/get`);
     const json = await response.text();
     const list = JSON.parse(json)
@@ -11,8 +11,8 @@ async function get(putting, pass) {
     }else{
         turn_color.textContent = '白の番';
     }
-    color_change(othello_map_before);
-    putable = check_putable(othello_map_before, color_before);
+    color_change(othello_map_before)
+    console.log(putable);
     for(let i=1; i<9; i++){
         for(let j=1; j<9; j++){
             if(button[i-1][j-1] == null) continue;
@@ -39,15 +39,12 @@ async function get(putting, pass) {
     }
     let finish=false;
     if(white===0){
-        clearInterval(putting);
         alert("黒の勝ちです")
         finish=true;
     }else if(black===0){
-        clearInterval(putting);
         alert("白の勝ちです")
         finish=true;
     }else if(turn === 60){
-        clearInterval(putting);
         if(black>white){
             alert("黒の勝ちです")
         }else if(black<white){
@@ -62,17 +59,16 @@ async function get(putting, pass) {
     }
 }
 //おく処理
-async function put(putting) {
+async function put() {
     const number= max_index(count);
     if(number){
         const response = await fetch(`/circle_put?position=${number}`);
-        await get(putting, false);
+        await get(false);
     }else{
-        await get(putting, true);
+        await get(true);
     }
     for(let i=0; i<8; i++){
         for(let j = 0; j < 8; j++){
-            if(button[i][j] == null) continue;
             if(button[i][j].disabled===true){
                 count[i][j] = -1;
             }else{
@@ -136,7 +132,7 @@ const main=async() =>{
     await get();
     for(let i=0; i<8; i++){
         for(let j = 0; j < 8; j++){
-            if(button[i][j] == null) continue;
+            if(button[i][j] == null)continue;
             if(button[i][j].disabled===true){
                 count[i][j] = -1;
             }else{
@@ -148,21 +144,35 @@ const main=async() =>{
         for(let j=1; j<9; j++){
             let number=10*i+j;
             button[i-1].push(document.getElementById(`${number}`));
-            if(button[i-1][j-1] == null) continue;
+            if(button[i-1][j-1] == null)continue;
             button[i-1][j-1].onclick = async () => {
-                button_click(i-1,j-1)
+                const number = 10*i+j;
+                if(number){
+                    const response = await fetch(`/circle_put?position=${number}`);
+                    await get(false);
+                }else{
+                    await get(true);
+                }
+                for(let i=0; i<8; i++){
+                    for(let j = 0; j < 8; j++){
+                        if(button[i][j] == null)continue;
+                        if(button[i][j].disabled===true){
+                            count[i][j] = -1;
+                        }else{
+                            count[i][j] = 0;
+                        }
+                    }
+                }
             }
         }
     }
-    let putting = setInterval(function(){
-        put(putting)
-    },500)
 }
 main()
 
 //ボタンを押された時
 function button_click(i,j){
     count[i][j]++;
+    put();
     for(let k=0; k<8; k++){
         for(let l=0; l<8; l++){
             if(button[k][l].disabled===false){

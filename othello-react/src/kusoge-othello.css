@@ -47,6 +47,9 @@ body{
   .siromaru{
     color: white;
   }
+  .kuromaru{
+    color:black;
+  }
   .turn {
     display: block;
     width: 800px;
