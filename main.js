@@ -294,16 +294,6 @@ function circle_reversing(pos_x, pos_y, color){
     reverse_up_left(pos_x - 1, pos_y - 1, color);
     return othello_map;
 }
-setInterval(function(){
-    if(pass===false){
-        if(color===1){
-            color = 2;
-        }else{
-            color = 1;
-        }
-    }
-    turn++;
-});
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("static"));
 
@@ -313,9 +303,14 @@ app.get("/get", (request, response) => {
 
 app.get("/put", (request, response) => {
     const position = request.query.position;
-    const pos_x = position%10;
+    const pos_x = position % 10;
     const pos_y = Math.floor(position/10);
-    othello_map = common_reversing(pos_x, pos_y, color);
+    othello_map = circle_reversing(pos_x, pos_y, color);
+    if(color == 1){
+        color = 2;
+    }else {
+        color = 1;
+    }
     response.json([othello_map, color]);
 });
 app.get("/circle_put", (request, response) =>{
