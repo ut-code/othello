@@ -52,13 +52,14 @@ body{
   }
   .turn {
     display: block;
-    width: 800px;
-    position: relative;
-    margin-left: auto;
+    width: 150px;
+    position: fixed;
+    top: 140px;
     margin-right: auto;
     color: white;
-    text-align: right;
+    text-align: center;
     font-size: 2vw;
+    background-color: #80aba9;
   }
   .next {
     display: block;
