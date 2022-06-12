@@ -254,6 +254,43 @@ function two_reversing(pos_x:number, pos_y:number, color:number,othello_map,oppo
     }
   }
 
+  function neotwo_reversing(pos_x:number, pos_y:number, color:number,othello_map,opposite_color,i){
+    const old=othello_map.map(row => row.slice());
+    if(othello_map[pos_x][pos_y]==0&&othello_map[pos_x-1][pos_y]==0){
+      othello_map[pos_x][pos_y] = color;
+      othello_map[pos_x][pos_y+1]=color;
+      console.log(i);
+      [i,othello_map]=reverse_up(pos_x - 1, pos_y, color,othello_map,opposite_color,i); 
+      [i,othello_map]=reverse_down(pos_x + 1, pos_y, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_right(pos_x, pos_y + 1, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_left(pos_x, pos_y - 1, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_up_right(pos_x - 1, pos_y + 1, color,othello_map,opposite_color,i); 
+      [i,othello_map]=reverse_down_right(pos_x + 1, pos_y + 1, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_down_left(pos_x + 1, pos_y - 1, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_up_left(pos_x - 1, pos_y - 1, color,othello_map,opposite_color,i);
+      //right
+      [i,othello_map]=reverse_up(pos_x - 1, pos_y+1, color,othello_map,opposite_color,i); 
+      [i,othello_map]=reverse_down(pos_x + 1, pos_y+1, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_right(pos_x, pos_y + 2, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_left(pos_x, pos_y, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_up_right(pos_x - 1, pos_y + 2, color,othello_map,opposite_color,i); 
+      [i,othello_map]=reverse_down_right(pos_x + 1, pos_y + 2, color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_down_left(pos_x + 1, pos_y , color,othello_map,opposite_color,i);
+      [i,othello_map]=reverse_up_left(pos_x - 1, pos_y , color,othello_map,opposite_color,i);
+      console.log(i);
+      if(i==16){
+        othello_map=old;
+      }
+      else{
+        color*=-1;
+      }
+      return [color,othello_map];
+    }
+    else{
+      return [color,othello_map];
+    }
+  }
+
   function three_reversing(pos_x:number, pos_y:number, color:number,othello_map,opposite_color,i){
     const old=othello_map.map(row => row.slice());
     if(othello_map[pos_x][pos_y]==0&&othello_map[pos_x-1][pos_y]==0&&othello_map[pos_x-1][pos_y+1]==0){
@@ -328,7 +365,8 @@ export default function App() {
   const [block,setBlock]=useState([
     [["●","\n"],["\n","\n"]],
     [["●","\n"],["●","\n"]],
-    [["●","●"],["●","\n"]]
+    [["●","●"],["●","\n"]],
+    [["●","●"],["\n","\n"]]
   ])
   const [string_board,setString]=useState<string[][]>([])
   return (
@@ -359,7 +397,7 @@ export default function App() {
             <li>もし、駒をおける場所がなくなったら、"パス"ボタンを押して相手に手番を譲りましょう</li>
           </ul>
         </p>
-        <a href="https://othello.bg0r.onrender.com"></a>
+        <a href="https://othello.bg0r.onrender.com">メインページに戻る</a>
       </div>
       <p><div className="turn">{color==1?<span className="kuromaru">●の手番</span>:<span className="siromaru">●の手番</span>}</div></p>
       <p><button className="pass" onClick={()=>{
@@ -411,12 +449,12 @@ export default function App() {
                     <td><button className="othellobutton" type="button" onClick={() => {
                       const old = board.map(row => row.slice());
                       console.log("Hey!");                      
-                      const [newcolor,newBoard] = block_id==0?common_reversing(index,subIndex,color,old,opposite_color,i):block_id==1?two_reversing(index,subIndex,color,old,opposite_color,i):three_reversing(index,subIndex,color,old,opposite_color,i);
+                      const [newcolor,newBoard] = block_id==0?common_reversing(index,subIndex,color,old,opposite_color,i):block_id==1?two_reversing(index,subIndex,color,old,opposite_color,i):block_id==2?three_reversing(index,subIndex,color,old,opposite_color,i):neotwo_reversing(index,subIndex,color,old,opposite_color,i);
                       console.log(newBoard);
                       setI(0);
                       setBoard(newBoard);
                       setColor(newcolor);
-                      const random_number=Math.floor(Math.random()*3);
+                      const random_number=Math.floor(Math.random()*4);
                       console.log(random_number);
                       setId(random_number);
                     //   setString(board.map((row,y)=>
