@@ -2,25 +2,31 @@ body{
   background-color: #2c4f54;
 }
 div.title {
+  width: 800px;
   position: relative;
-  margin-left: 500px;
-  margin-right: 500px;
+  margin-left: auto;
+  margin-right: auto;
   color:white;
+  text-align: center;
 }
 div.main {
   position: relative;
-  margin-left: 300px;
-  margin-right: 300px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: white;
   width:800px;
   color:black;
   padding:10px;
   border-radius: 10px;
+  box-shadow: 5px 5px 5px black;
 }
 .board {
+  width: 560px;
   position:relative;
-  margin-left: 400px;
-  margin-right: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  box-shadow: 5px 5px 5px black;
 }
 .board td {
   width: 70px;
@@ -28,6 +34,7 @@ div.main {
   background-color: #80aba9;
   text-align: center;
   cursor: pointer;
+  border: 1px solid black;
 }
 .othellobutton {
   width: 70px;
