@@ -256,7 +256,7 @@ function two_reversing(pos_x:number, pos_y:number, color:number,othello_map,oppo
 
   function neotwo_reversing(pos_x:number, pos_y:number, color:number,othello_map,opposite_color,i){
     const old=othello_map.map(row => row.slice());
-    if(othello_map[pos_x][pos_y]==0&&othello_map[pos_x-1][pos_y]==0){
+    if(othello_map[pos_x][pos_y]==0&&othello_map[pos_x][pos_y+1]==0){
       othello_map[pos_x][pos_y] = color;
       othello_map[pos_x][pos_y+1]=color;
       console.log(i);
@@ -325,7 +325,7 @@ function two_reversing(pos_x:number, pos_y:number, color:number,othello_map,oppo
       [i,othello_map]=reverse_down_right(pos_x, pos_y + 2, color,othello_map,opposite_color,i);
       [i,othello_map]=reverse_down_left(pos_x, pos_y, color,othello_map,opposite_color,i);
       [i,othello_map]=reverse_up_left(pos_x - 2, pos_y, color,othello_map,opposite_color,i);
-      if(i==16){
+      if(i==24){
         othello_map=old;
       }
       else{
