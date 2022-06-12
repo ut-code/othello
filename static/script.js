@@ -9,12 +9,10 @@ const get = async () => {
     let false_number=0;
     for(let i=1; i<9; i++){
         for(let j=1; j<9; j++){
-            let number=10*i+j;
-            const button=document.getElementById(`${number}`);
             if(putable[i-1][j-1]===false){
-                button.disabled=true;
+                button[i-1][j-1].disabled=true;
             }else{
-                button.disabled=false;
+                button[i-1][j-1].disabled=false;
                 false_number++;
             }
         }
@@ -23,23 +21,92 @@ const get = async () => {
         ;//パスの処理を記述する
     }
 }
-get()
-for(let i=1; i<9; i++){
-    for(let j=1; j<9; j++){
-        let number=10*i+j;
-        const button=document.getElementById(`${number}`);
-        button.onclick = async () => {
-            const response = await fetch(`/put?position=${number}`);
-            const json = await response.text();
-            const list = JSON.parse(json)
-            const othello_map_after = list[0];
-            const color_after = list[1];
-            color_change(othello_map_after);
-            get();
+//おく処理
+const put = async() => {
+    const number= max_index(count);
+    const response = await fetch(`/put?position=${number}`);
+    const json = await response.text();
+    const list = JSON.parse(json)
+    const othello_map_after = list[0];
+    const color_after = list[1];
+    color_change(othello_map_after);
+    await get();
+    for(let i=0; i<8; i++){
+        for(let j = 0; j < 8; j++){
+            if(button[i][j].disabled===true){
+                count[i][j] = -1;
+            }else{
+                count[i][j] = 0;
+            }
         }
     }
 }
+let button=[]
+for(let i=0; i<8; i++){
+    button.push([])
+    for(let j=0; j<8; j++){
+        number=i*10+j+11;
+        button[i][j]=document.getElementById(`${number}`);
+    }
+}
+let count=[]
+for(let i=0; i<8; i++){
+    count.push([])
+}
+//繰り返しを行う関数
+const main=async() =>{
+    await get();
+    for(let i=0; i<8; i++){
+        for(let j = 0; j < 8; j++){
+            if(button[i][j].disabled===true){
+                count[i][j] = -1;
+            }else{
+                count[i][j] = 0;
+            }
+        }
+    }
+    for(let i=1; i<9; i++){
+        for(let j=1; j<9; j++){
+            let number=10*i+j;
+            button[i-1].push(document.getElementById(`${number}`));
+            button[i-1][j-1].onclick = async () => {
+                button_click(i-1,j-1)
+            }
+        }
+    }
+    setInterval(put,2000)
+}
+main()
 
+//ボタンを押された時
+function button_click(i,j){
+    count[i][j]++;
+    for(let k=0; k<8; k++){
+        for(let l=0; l<8; l++){
+            if(button[k][l].disabled===false){
+                button[k][l].disabled=true;
+            }
+        }
+    }
+}
+//最大値のインデックスを取得
+function max_index(count_map){
+    let index = [];
+    let value = 0;
+    for(let i = 0; i < 8; i ++){
+        for(let j = 0; j < 8; j ++){
+            if(value < count_map[i][j]){
+                index = [10*i+j+11];
+                value = 10*i+j+11;
+            }else if(value === count_map[i][j]){
+                index.push(10*i+j+11);
+            }
+        }
+    }
+    console.log(index)
+    let rand = Math.floor(Math.random()*index.length);
+    return index[rand];
+}
 //色を変える
 function color_change(othello_map){
     for(let i=1; i<9; i++){
