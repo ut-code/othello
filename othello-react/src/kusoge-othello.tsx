@@ -397,7 +397,7 @@ export default function App() {
             <li>もし、駒をおける場所がなくなったら、"パス"ボタンを押して相手に手番を譲りましょう</li>
           </ul>
         </p>
-        <a href="https://othello.bg0r.onrender.com">メインページに戻る</a>
+        <a href="https://othello-bg0r.onrender.com">メインページに戻る</a>
       </div>
       <p><div className="turn">{color==1?<span className="kuromaru">●の手番</span>:<span className="siromaru">●の手番</span>}</div></p>
       <p><button className="pass" onClick={()=>{
