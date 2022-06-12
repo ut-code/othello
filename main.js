@@ -305,7 +305,7 @@ app.get("/put", (request, response) => {
     const position = request.query.position;
     const pos_x = position % 10;
     const pos_y = Math.floor(position/10);
-    othello_map = circle_reversing(pos_x, pos_y, color);
+    othello_map = common_reversing(pos_x, pos_y, color);
     if(color == 1){
         color = 2;
     }else {
