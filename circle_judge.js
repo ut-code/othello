@@ -206,7 +206,7 @@ function circular_right(pos, color, cnt){
     if(used_map[next_x][next_y] == 0){
         circular_right(next_pos, color);
     }
-    if(used_map[next_x][next_y] == 1 && flag == 1)cnt+=1;
+    if(used_map[pos_x][pos_y] == 1 && flag == 1)cnt+=1;
 }
 function circular_left(pos, color, cnt){
     let pos_x = que2[pos][0];
@@ -226,7 +226,7 @@ function circular_left(pos, color, cnt){
     if(used_map[next_x][next_y] == 0){
         circular_left(next_pos, color);
     }
-    if(used_map[next_x][next_y] == 1 && flag == 1) cnt+=1;
+    if(used_map[pos_x][pos_y] == 1 && flag == 1) cnt+=1;
 }
 function circle_reversing(pos_x, pos_y, color){
     let cnt = 0;
