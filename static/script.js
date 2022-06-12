@@ -1,36 +1,37 @@
-const get = async () => {
+async function get(putting, pass) {
     const response = await fetch(`/get`);
     const json = await response.text();
     const list = JSON.parse(json)
     const othello_map_before = list[0];
     const color_before = list[1];
     color_change(othello_map_before)
-    const putable = check_putable(othello_map_before, color_before)
-    let false_number=0;
+    putable = check_putable(othello_map_before, color_before)
     for(let i=1; i<9; i++){
         for(let j=1; j<9; j++){
-            if(putable[i-1][j-1]===false){
+            if(putable[j][i]===false){
                 button[i-1][j-1].disabled=true;
             }else{
                 button[i-1][j-1].disabled=false;
-                false_number++;
             }
         }
     }
-    if(false_number===64){
-        ;//パスの処理を記述する
+    if(pass===true){
+        const response = await fetch(`/pass`);
+    }
+    if(turn === 64){
+        clearInterval(putting);
     }
 }
 //おく処理
-const put = async() => {
+async function put(putting) {
     const number= max_index(count);
-    const response = await fetch(`/put?position=${number}`);
-    const json = await response.text();
-    const list = JSON.parse(json)
-    const othello_map_after = list[0];
-    const color_after = list[1];
-    color_change(othello_map_after);
-    await get();
+    if(number){
+        const response = await fetch(`/put?position=${number}`);
+        turn++;
+        await get(putting, false);
+    }else{
+        await get(putting, true);
+    }
     for(let i=0; i<8; i++){
         for(let j = 0; j < 8; j++){
             if(button[i][j].disabled===true){
@@ -53,6 +54,45 @@ let count=[]
 for(let i=0; i<8; i++){
     count.push([])
 }
+let othello_map = [
+    [3,3,3,3,3,3,3,3,3,3],
+    [3,3,3,1,1,1,0,3,3,3],
+    [3,3,1,0,0,0,0,1,3,3],
+    [3,2,0,0,0,0,0,0,1,3],
+    [3,1,0,0,1,2,0,0,1,3],
+    [3,1,0,0,2,1,0,0,1,3],
+    [3,1,0,0,0,0,0,0,1,3],
+    [3,3,1,0,0,0,0,1,3,3],
+    [3,3,3,1,2,1,1,3,3,3],
+    [3,3,3,3,3,3,3,3,3,3]
+];
+let used_map = [
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0]
+];
+let putable = [
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0]
+];
+let flag = 0;
+let cnt = 0;
+let turn = 0;
 //繰り返しを行う関数
 const main=async() =>{
     await get();
@@ -74,7 +114,9 @@ const main=async() =>{
             }
         }
     }
-    setInterval(put,2000)
+    let putting = setInterval(function(){
+        put(putting)
+    },500)
 }
 main()
 
@@ -126,195 +168,191 @@ function color_change(othello_map){
 
 
 //置けるかどうか判定
-function check_putable(othello_map, turn){
-    const putable=[];
-    for(let number=0; number<8; number++){
-        putable.push([])
+function initialize(){
+    flag = 0;
+    used_map = [
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0]
+    ];
+}
+function reverse_up(pos_x, pos_y, color){
+    used_map[pos_x][pos_y] = 1;
+    opposite_color = 1;
+    if(color == 1) opposite_color = 2;
+
+    if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
+    else if(othello_map[pos_x][pos_y] == color){
+        flag = 1;
+        return;
     }
-    for(let i=0; i<8; i++){
-        for(let j=0; j<8; j++){
-            if(othello_map[i+1][j+1]===1 || othello_map[i+1][j+1]===2){
-                putable[j][i]=false;
-                continue
+    if(pos_x >= 1 && used_map[pos_x-1][pos_y] == 0){
+        reverse_up(pos_x-1, pos_y, color);
+    }
+    if(pos_x >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1) cnt+=1;
+    console.log(cnt);
+    return cnt;
+}
+function reverse_down(pos_x, pos_y, color){
+    used_map[pos_x][pos_y] = 1;
+    opposite_color = 1;
+    if(color == 1) opposite_color = 2;
+
+    if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
+    else if(othello_map[pos_x][pos_y] == color){
+        flag = 1;
+        return;
+    }
+    if(pos_x <= 8 && used_map[pos_x+1][pos_y] == 0){
+        reverse_down(pos_x+1, pos_y, color);
+    }
+    if(pos_x <= 8 && used_map[pos_x][pos_y] == 1 && flag == 1)cnt+=1;
+    return cnt;
+}
+function reverse_right(pos_x, pos_y, color){
+    used_map[pos_x][pos_y] = 1;
+    opposite_color = 1;
+    if(color == 1) opposite_color = 2;
+
+    if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
+    else if(othello_map[pos_x][pos_y] == color){
+        flag = 1;
+        return;
+    }
+    if(pos_y <= 8 && used_map[pos_x][pos_y+1] == 0){
+        reverse_right(pos_x, pos_y+1, color);
+    }
+    if(pos_y <= 8 && used_map[pos_x][pos_y] == 1 && flag == 1) cnt+=1;
+    return cnt;
+}
+function reverse_left(pos_x, pos_y, color){
+    used_map[pos_x][pos_y] = 1;
+    opposite_color = 1;
+    if(color == 1) opposite_color = 2;
+
+    if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
+    else if(othello_map[pos_x][pos_y] == color){
+        flag = 1;
+        return;
+    }
+    if(pos_y >= 1 && used_map[pos_x][pos_y-1] == 0){
+        reverse_left(pos_x, pos_y-1, color);
+    }
+    if(pos_y >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1)cnt+=1;
+    return cnt;
+}
+
+function reverse_up_right(pos_x, pos_y, color){
+    used_map[pos_x][pos_y] = 1;
+    opposite_color = 1;
+    if(color == 1) opposite_color = 2;
+
+    if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
+    else if(othello_map[pos_x][pos_y] == color){
+        flag = 1;
+        return;
+    }
+    if(pos_x >= 1 && pos_y <= 8 && used_map[pos_x - 1][pos_y + 1] == 0){
+        reverse_up_right(pos_x - 1, pos_y + 1, color);
+    }
+    if(pos_x >= 1 && pos_y <= 8 && used_map[pos_x][pos_y] == 1 && flag == 1)cnt+=1;
+    return cnt;
+}
+
+function reverse_up_left(pos_x, pos_y, color){
+    used_map[pos_x][pos_y] = 1;
+    opposite_color = 1;
+    if(color == 1) opposite_color = 2;
+
+    if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
+    else if(othello_map[pos_x][pos_y] == color){
+        flag = 1;
+        return;
+    }
+    if(pos_x >= 1 && pos_y >= 1 && used_map[pos_x - 1][pos_y - 1] == 0){
+        reverse_up_left(pos_x - 1, pos_y - 1, color);
+    }
+    if(pos_x >= 1 && pos_y >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1) cnt+=1;
+}
+
+function reverse_down_left(pos_x, pos_y, color){
+    used_map[pos_x][pos_y] = 1;
+    opposite_color = 1;
+    if(color == 1) opposite_color = 2;
+
+    if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
+    else if(othello_map[pos_x][pos_y] == color){
+        flag = 1;
+        return;
+    }
+    if(pos_x <= 8 && pos_y >= 1 && used_map[pos_x + 1][pos_y - 1] == 0){
+        reverse_down_left(pos_x + 1, pos_y - 1, color);
+    }
+    if(pos_x <= 8 && pos_y >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1) cnt+=1;
+    return cnt;
+}
+
+function reverse_down_right(pos_x, pos_y, color){
+    used_map[pos_x][pos_y] = 1;
+    opposite_color = 1;
+    if(color == 1) opposite_color = 2;
+
+    if(othello_map[pos_x][pos_y] == 0 || othello_map[pos_x][pos_y] == 3) return;
+    else if(othello_map[pos_x][pos_y] == color){
+        flag = 1;
+        return;
+    }
+    if(pos_x <= 8 && pos_y <= 8 && used_map[pos_x + 1][pos_y + 1] == 0){
+        reverse_down_right(pos_x + 1, pos_y + 1, color);
+    }
+    if(pos_x <= 8 && pos_y <= 8 && used_map[pos_x][pos_y] == 1 && flag == 1)cnt+=1;
+    return cnt;
+}
+function common_reversing(pos_x, pos_y, color){
+    cnt = 0;
+    initialize();
+    reverse_up(pos_x - 1, pos_y, color, cnt); 
+    initialize();
+    reverse_down(pos_x + 1, pos_y, color, cnt);
+    initialize();
+    reverse_right(pos_x, pos_y + 1, color, cnt);
+    initialize();
+    reverse_left(pos_x, pos_y - 1, color, cnt);
+    initialize();
+    reverse_up_right(pos_x - 1, pos_y + 1, color, cnt); 
+    initialize();
+    reverse_down_right(pos_x + 1, pos_y + 1, color, cnt);
+    initialize();
+    reverse_down_left(pos_x + 1, pos_y - 1, color, cnt);
+    initialize();
+    reverse_up_left(pos_x - 1, pos_y - 1, color, cnt);
+    console.log(cnt);
+    return cnt;
+}
+
+function check_putable(list,color){
+    othello_map = list;
+    for(let i = 0;i <= 9; i++){
+        for(let j = 0;j <= 9;j++){
+            if(othello_map[i][j] == 1 || othello_map[i][j] == 2 || othello_map[i][j] == 3){
+                putable[i][j] = false;
+            }else{
+                console.log([i,j]);
+                if(common_reversing(i, j, color) > 0){
+                    putable[i][j] = true;
+                }else{
+                    putable[i][j] = false;
+                }
             }
-            const left_top_putable=left_top(othello_map, turn, i+1, j+1)
-            if(left_top_putable===true){
-                putable[j][i]=true;
-                continue
-            }
-            const top_putable=tops(othello_map, turn, i+1, j+1)
-            if(top_putable===true){
-                putable[j][i]=true;
-                continue
-            }
-            const right_top_putable=right_top(othello_map, turn, i+1, j+1)
-            if(right_top_putable===true){
-                putable[j][i]=true;
-                continue
-            }
-            const left_putable=left(othello_map, turn, i+1, j+1)
-            if(left_putable===true){
-                putable[j][i]=true;
-                continue
-            }
-            const right_putable=right(othello_map, turn, i+1, j+1)
-            if(right_putable===true){
-                putable[j][i]=true;
-                continue
-            }
-            const left_down_putable=left_down(othello_map, turn, i+1, j+1)
-            if(left_down_putable===true){
-                putable[j][i]=true;
-                continue
-            }
-            const down_putable=down(othello_map, turn, i+1, j+1)
-            if(down_putable===true){
-                putable[j][i]=true;
-                continue
-            }
-            const right_down_putable=right_down(othello_map, turn, i+1, j+1)
-            if(right_down_putable===true){
-                putable[j][i]=true;
-                continue
-            }
-            putable[j][i]=false;
         }
     }
+    console.log(color);
     return putable;
-}
-
-//左上の判定
-function left_top(othello_map, turn, i, j){
-    if(othello_map[i-1][j-1]===0 || othello_map[i-1][j-1]===3){
-        return false;
-    }else if(othello_map[i-1][j-1]!==turn){
-        if(othello_map[i-2][j-2]===0 || othello_map[i-2][j-2]===3){
-            return false;
-        }else if(othello_map[i-2][j-2]!==turn){
-            left_top(othello_map, turn, i-1, j-1);
-        }else{
-            return true;
-        }
-    }else{
-        return false;
-    }
-}
-
-//上の判定
-function tops(othello_map, turn, i, j){
-    if(othello_map[i-1][j]===0 || othello_map[i-1][j]===3){
-        return false;
-    }else if(othello_map[i-1][j]!==turn){
-        if(othello_map[i-2][j]===0 || othello_map[i-2][j]===3){
-            return false;
-        }else if(othello_map[i-2][j]!==turn){
-            tops(othello_map, turn, i-1, j);
-        }else{
-            return true;
-        }
-    }else{
-        return false;
-    }
-}
-
-//右上の判定
-function right_top(othello_map, turn, i, j){
-    if(othello_map[i-1][j+1]===0 || othello_map[i-1][j+1]===3){
-        return false;
-    }else if(othello_map[i-1][j+1]!==turn){
-        if(othello_map[i-2][j+2]===0 || othello_map[i-2][j+2]===3){
-            return false;
-        }else if(othello_map[i-2][j+2]!==turn){
-            right_top(othello_map, turn, i-1, j+1);
-        }else{
-            return true;
-        }
-    }else{
-        return false;
-    }
-}
-
-//左の判定
-function left(othello_map, turn, i, j){
-    if(othello_map[i][j-1]===0 || othello_map[i][j-1]===3){
-        return false;
-    }else if(othello_map[i][j-1]!==turn){
-        if(othello_map[i][j-2]===0 || othello_map[i][j-2]===3){
-            return false;
-        }else if(othello_map[i][j-2]!==turn){
-            left(othello_map, turn, i, j-1);
-        }else{
-            return true;
-        }
-    }else{
-        return false;
-    }
-}
-
-//右の判定
-function right(othello_map, turn, i, j){
-    if(othello_map[i][j+1]===0 || othello_map[i][j+1]===3){
-        return false;
-    }else if(othello_map[i][j+1]!==turn){
-        if(othello_map[i][j+2]===0 || othello_map[i][j+2]===3){
-            return false;
-        }else if(othello_map[i][j+2]!==turn){
-            right(othello_map, turn, i, j+1);
-        }else{
-            return true;
-        }
-    }else{
-        return false;
-    }
-}
-
-//左下の判定
-function left_down(othello_map, turn, i, j){
-    if(othello_map[i+1][j-1]===0 || othello_map[i+1][j-1]===3){
-        return false;
-    }else if(othello_map[i+1][j-1]!==turn){
-        if(othello_map[i+2][j-2]===0 || othello_map[i+2][j-2]===3){
-            return false;
-        }else if(othello_map[i+2][j-2]!==turn){
-            left_down(othello_map, turn, i+1, j-1);
-        }else{
-            return true;
-        }
-    }else{
-        return false;
-    }
-}
-
-//下の判定
-function down(othello_map, turn, i, j){
-    if(othello_map[i+1][j]===0 || othello_map[i+1][j]===3){
-        return false;
-    }else if(othello_map[i+1][j]!==turn){
-        if(othello_map[i+2][j]===0 || othello_map[i+2][j]===3){
-            return false;
-        }else if(othello_map[i+2][j]!==turn){
-            down(othello_map, turn, i+1, j);
-        }else{
-            return true;
-        }
-    }else{
-        return false;
-    }
-}
-
-//右下の判定
-function right_down(othello_map, turn, i, j){
-    if(othello_map[i+1][j+1]===0 || othello_map[i+1][j+1]===3){
-        return false;
-    }else if(othello_map[i+1][j+1]!==turn){
-        if(othello_map[i+2][j+2]===0 || othello_map[i+2][j+2]===3){
-            return false;
-        }else if(othello_map[i+2][j+2]!==turn){
-            right_down(othello_map, turn, i+1, j+1);
-        }else{
-            return true;
-        }
-    }else{
-        return false;
-    }
 }
