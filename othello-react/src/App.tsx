@@ -248,7 +248,7 @@ export default function App() {
                       const used=used_board.map(row => row.slice());
                       const copied_color=color;
                       console.log("Hey!");
-                      const newBoard = common_reversing(index,subIndex,color,old,used,flag,opposite_color);
+                      const newBoard = common_reversing(index,subIndex,color,old,opposite_color);
                       console.log(newBoard);
                       setBoard(newBoard);
                       setColor(copied_color*(-1));
