@@ -1,10 +1,19 @@
 .black{
+    height:40px;
+    width:40px;
     background-color:black;
+    border-radius: 50%;
 }
 .white{
+    height:40px;
+    width:40px;
     background-color:white;
+    border-radius: 50%;
 }
 .none{
+    height:100%;
+    width:100%;
+    display:none;
     background-color:#80aba9;
 }
 body{
