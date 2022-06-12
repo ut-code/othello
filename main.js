@@ -359,5 +359,5 @@ app.get("/reset", (request, response) => {
         response.send("a");
     },60000)
 })
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
