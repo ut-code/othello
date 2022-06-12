@@ -13,17 +13,20 @@ async function get(pass) {
     }
     color_change(othello_map_before)
     putable = check_putable(othello_map_before, color_before)
+    let pass_number=0;
     for(let i=1; i<9; i++){
         for(let j=1; j<9; j++){
             if(putable[j][i]===false){
                 button[i-1][j-1].disabled=true;
             }else{
                 button[i-1][j-1].disabled=false;
+                pass_number++;
             }
         }
     }
-    if(pass===true){
-        const response = await fetch(`/pass`);
+    console.log(pass_number)
+    if(pass_number===0){
+        const response = await fetch("/pass");
     }
     let black = 0;
     let white = 0;
