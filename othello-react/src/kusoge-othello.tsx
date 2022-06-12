@@ -279,8 +279,8 @@ export default function App() {
   const [i,setI]=useState(0);
   const [block_id,setId]=useState(Number);
   const [block,setBlock]=useState([
-    [[1,0],[0,0]],
-    [[1,0],[1,0]]
+    [["●","\n"],["\n","\n"]],
+    [["●","\n"],["●","\n"]]
   ])
   const [string_board,setString]=useState<string[][]>([])
   return (
@@ -312,7 +312,11 @@ export default function App() {
           </ul>
         </p>
       </div>
-      <p><div className="turn">{color}の手番</div><button className="pass" id="">パス</button></p>
+      <p><div className="turn">{color==1?<span className="kuromaru">●の手番</span>:<span className="siromaru">●の手番</span>}</div></p>
+      <p><button className="pass" onClick={()=>{
+        const pass_color=color*(-1);
+        setColor(pass_color);
+      }}>パス</button></p>
       <p>
        <table className="next">
          <tbody>
@@ -321,7 +325,7 @@ export default function App() {
                     <tr>
                         {item.map((subItem,subIndex)=>{
                             return (
-                                <td>{subItem}</td>
+                                <td>{color==1?<span className="kuromaru">{subItem}</span>:<span className="siromaru">{subItem}</span>}</td>
                             )
                         })}
                     </tr>
