@@ -2,40 +2,78 @@ body{
     background-color: #2c4f54;
   }
   div.title {
+    display: block;
+    width: 800px;
     position: relative;
-    margin-left: 500px;
-    margin-right: 500px;
+    margin-left: auto;
+    margin-right: auto;
     color:white;
+    text-align: center;
   }
   div.main {
-    position: relative;
-    margin-left: 300px;
-    margin-right: 300px;
-    background-color: white;
+    display: block;
     width:800px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
     color:black;
     padding:10px;
     border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
   }
   .board {
+    display: block;
+    width: 800px;
     position:relative;
-    margin-left: 400px;
-    margin-right: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .board td {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     background-color: #80aba9;
     text-align: center;
     cursor: pointer;
   }
   .othellobutton {
-    width: 70px;
-    height:70px;
-    font-size: 3.8vw;
+    width: 50px;
+    height: 50px;
+    font-size: 3vw;
     text-align: center;
     background-color: #80aba9;
+    border: 0px;
   }
   .siromaru{
-    color: aliceblue;
+    color: white;
+  }
+  .turn {
+    display: block;
+    width: 800px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    text-align: right;
+    font-size: 2vw;
+  }
+  .next {
+    display: block;
+    width: 800px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 3vw;
+  }
+  .pass {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 40px;
+    box-shadow: 3px 3px 3px black;
+    color: white;
+    background-color: #96514d;
+    border: 0px;
+    font-size: 1.7vw;
   }

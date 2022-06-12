@@ -312,9 +312,10 @@ export default function App() {
           </ul>
         </p>
       </div>
-      <p>{color}の手番です</p>
-      <table>
-        <tbody>
+      <p><div className="turn">{color}の手番</div><button className="pass" id="">パス</button></p>
+      <p>
+       <table className="next">
+         <tbody>
             {block[block_id].map((item,index)=>{
                 return(
                     <tr>
@@ -326,8 +327,9 @@ export default function App() {
                     </tr>
                 );
             })}
-        </tbody>
-      </table>
+         </tbody>
+       </table>
+      </p>
       <table className="board">
         <tbody>
           {board.map((item, index) => {
