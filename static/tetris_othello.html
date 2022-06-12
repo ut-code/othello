@@ -2,38 +2,44 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <title>Dumb Othello</title>
+    <title>Othello</title>
     <link rel="stylesheet" href="./style.css">
 </head>
     <body>
-        <div class="title" align="center"><h1><font size=7>無料オンラインオセロゲーム (円形モード)</font></h1></div>
+        <div class="title" align="center"><h1><font size=7>無料オンラインオセロゲーム (テトリスモード)</font></h1></div>
         <div class="main">
-        <p ><font size=4>これは無料でオンライン上の世界の人々と自由に独自ルールのオセロの対戦を楽しむことのできるサイトです。</font></p>
+        <p ><font size=4>これは無料でオンライン上の世界の人々と自由にオセロの対戦を楽しむことのできるサイトです。</font></p>
         <p><font size=4>遊び方</font>
             <ul>
                 <li><font size=4>自分の手番になったらマス目をクリックして、相手の駒を挟みましょう</font>
-                <li><font size=4>ただし、このオセロでは独自ルールとして一番端の円周は同じ列の扱いを受けます</font>
+                <li><font size=4>ただし、このオセロでは独自ルールとして置くことのできる駒はテトリスのようにブロック状になっています</font>
             </ul>
         </p>
         <a href="index.html">メインページへ戻る</a>
         </div>
         <p>
-        <table class="allboard" id=>
-            <tr class="strangeboard">
+        <table class="board" id=>
+            <tr>
+                <td><button id="11">11</button></td>
+                <td><button id="21">12</button></td>
                 <td><button id="31">13</button></td>
                 <td><button id="41">14</button></td>
                 <td><button id="51">15</button></td>
                 <td><button id="61">16</button></td>
+                <td><button id="71">17</button></td>
+                <td><button id="81">18</button></td>
             </tr>
-            <tr class="strangeboard2">
+            <tr>
+                <td><button id="12">21</button></td>
                 <td><button id="22">22</button></td>
                 <td><button id="32">23</button></td>
                 <td><button id="42">24</button></td>
                 <td><button id="52">25</button></td>
                 <td><button id="62">26</button></td>
                 <td><button id="72">27</button></td>
+                <td><button id="82">28</button></td>
             </tr>
-            <tr class="normalboard">
+            <tr>
                 <td><button id="13">31</button></td>
                 <td><button id="23">32</button></td>
                 <td><button id="33">33</button></td>
@@ -43,7 +49,7 @@
                 <td><button id="73">37</button></td>
                 <td><button id="83">38</button></td>
             </tr>
-            <tr class="normalboard">
+            <tr>
                 <td><button id="14">41</button></td>
                 <td><button id="24">42</button></td>
                 <td><button id="34">43</button></td>
@@ -53,7 +59,7 @@
                 <td><button id="74">47</button></td>
                 <td><button id="84">48</button></td>
             </tr>
-            <tr class="normalboard">
+            <tr>
                 <td><button id="15">51</button></td>
                 <td><button id="25">52</button></td>
                 <td><button id="35">53</button></td>
@@ -63,7 +69,7 @@
                 <td><button id="75">57</button></td>
                 <td><button id="85">58</button></td>
             </tr>
-            <tr class="normalboard">
+            <tr>
                 <td><button id="16">61</button></td>
                 <td><button id="26">62</button></td>
                 <td><button id="36">63</button></td>
@@ -73,19 +79,25 @@
                 <td><button id="76">67</button></td>
                 <td><button id="86">68</button></td>
             </tr>
-            <tr class="strangeboard2">
+            <tr>
+                <td><button id="17">71</button></td>
                 <td><button id="27">72</button></td>
                 <td><button id="37">73</button></td>
                 <td><button id="47">74</button></td>
                 <td><button id="57">75</button></td>
                 <td><button id="67">76</button></td>
                 <td><button id="77">77</button></td>
+                <td><button id="87">78</button></td>
             </tr>
-            <tr class="strangeboard">
+            <tr>
+                <td><button id="18">81</button></td>
+                <td><button id="28">82</button></td>
                 <td><button id="38">83</button></td>
                 <td><button id="48">84</button></td>
                 <td><button id="58">85</button></td>
                 <td><button id="68">86</button></td>
+                <td><button id="78">87</button></td>
+                <td><button id="88">88</button></td>
             </tr>
         </table>
         </p>
