@@ -225,5 +225,14 @@ app.get("/put", (request, response) => {
     }
     response.json([othello_map, color]);
 });
+
+app.get("/pass", (request, response) => {
+    if(color===1){
+        color = 2;
+    }else{
+        color = 1;
+    }
+    response.send(color)
+})
 app.listen(3000);
 
