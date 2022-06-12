@@ -6,7 +6,7 @@ async function get(pass) {
     const color_before = list[1];
     const turn =list[2];
     const turn_color = document.getElementById("turn");
-    if(turn == 1){
+    if(color_before == 1){
         turn_color.textContent = '黒の番';
     }else{
         turn_color.textContent = '白の番';

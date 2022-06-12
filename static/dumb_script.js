@@ -6,7 +6,7 @@ async function get(pass) {
     const color_before = list[1];
     const turn =list[2];
     const turn_color = document.getElementById("turn");
-    if(turn == 1){
+    if(color_before == 1){
         turn_color.textContent = '黒の番';
     }else{
         turn_color.textContent = '白の番';
@@ -39,12 +39,15 @@ async function get(pass) {
     }
     let finish=false;
     if(white===0){
+        clearInterval(loop)
         alert("黒の勝ちです")
         finish=true;
     }else if(black===0){
+        clearInterval(loop)
         alert("白の勝ちです")
         finish=true;
     }else if(turn === 60){
+        clearInterval(loop)
         if(black>white){
             alert("黒の勝ちです")
         }else if(black<white){
@@ -168,7 +171,7 @@ const main=async() =>{
     }
 }
 main()
-
+loop=setInterval(get,300,false)
 //ボタンを押された時
 function button_click(i,j){
     count[i][j]++;
