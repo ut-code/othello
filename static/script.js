@@ -4,6 +4,7 @@ async function get(putting, pass) {
     const list = JSON.parse(json)
     const othello_map_before = list[0];
     const color_before = list[1];
+    const turn =list[2];
     color_change(othello_map_before)
     putable = check_putable(othello_map_before, color_before)
     for(let i=1; i<9; i++){
@@ -29,12 +30,15 @@ async function get(putting, pass) {
             }
         }
     }
+    let finish=false;
     if(white===0){
         clearInterval(putting);
         alert("黒の勝ちです")
+        finish=true;
     }else if(black===0){
         clearInterval(putting);
         alert("白の勝ちです")
+        finish=true;
     }else if(turn === 60){
         clearInterval(putting);
         if(black>white){
@@ -44,6 +48,10 @@ async function get(putting, pass) {
         }else{
             alert("引き分けです")
         }
+        finish=true;
+    }
+    if(finish===true){
+        const response = await fetch(`/reset`);
     }
 }
 //おく処理
@@ -51,7 +59,6 @@ async function put(putting) {
     const number= max_index(count);
     if(number){
         const response = await fetch(`/put?position=${number}`);
-        turn++;
         await get(putting, false);
     }else{
         await get(putting, true);
@@ -65,7 +72,6 @@ async function put(putting) {
             }
         }
     }
-    console.log(turn);
 }
 let button=[]
 for(let i=0; i<8; i++){
@@ -117,7 +123,6 @@ let putable = [
 ];
 let flag = 0;
 let cnt = 0;
-let turn = 0;
 //繰り返しを行う関数
 const main=async() =>{
     await get();

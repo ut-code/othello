@@ -1,7 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const app = express();
-
+let turn = 0;
 let flag;
 let color = 1;
 let othello_map = [
@@ -298,7 +298,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("static"));
 
 app.get("/get", (request, response) => {
-    response.json([othello_map, color]);
+    response.json([othello_map, color, turn]);
 });
 
 app.get("/put", (request, response) => {
@@ -311,6 +311,7 @@ app.get("/put", (request, response) => {
     }else{
         color = 1;
     }
+    turn++;
     response.json([othello_map, color]);
 });
 app.get("/circle_put", (request, response) =>{
@@ -338,6 +339,25 @@ app.get("/pass", (request, response) => {
         color = 1;
     }
     response.send(color)
+});
+
+app.get("/reset", (request, response) => {
+    setTimeout(function(){
+        turn=0;
+        othello_map = [
+            [3,3,3,3,3,3,3,3,3,3],
+            [3,0,0,0,0,0,0,0,0,3],
+            [3,0,0,0,0,0,0,0,0,3],
+            [3,0,0,0,0,0,0,0,0,3],
+            [3,0,0,0,1,2,0,0,0,3],
+            [3,0,0,0,2,1,0,0,0,3],
+            [3,0,0,0,0,0,0,0,0,3],
+            [3,0,0,0,0,0,0,0,0,3],
+            [3,0,0,0,0,0,0,0,0,3],
+            [3,3,3,3,3,3,3,3,3,3]
+        ];
+        response.send("a");
+    },1000)
 })
 app.listen(3000);
 
