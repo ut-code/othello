@@ -200,8 +200,8 @@ function circular_right(pos, color){
     if(used_map[next_x][next_y] == 0){
         circular_right(next_pos, color);
     }
-    if(used_map[next_x][next_y] == 1 && flag == 1){
-        othello_map[next_x][next_y] = color;
+    if(used_map[pos_x][pos_y] == 1 && flag == 1){
+        othello_map[pos_x][pos_y] = color;
     }
 }
 function circular_left(pos, color){
@@ -222,8 +222,8 @@ function circular_left(pos, color){
     if(used_map[next_x][next_y] == 0){
         circular_left(next_pos, color);
     }
-    if(used_map[next_x][next_y] == 1 && flag == 1){
-        othello_map[next_x][next_y] = color;
+    if(used_map[pos_x][pos_y] == 1 && flag == 1){
+        othello_map[pos_x][pos_y] = color;
     }
 }
 function circle_reversing(pos_x, pos_y, color){
@@ -264,3 +264,4 @@ function circle_reversing(pos_x, pos_y, color){
     reverse_up_left(pos_x - 1, pos_y - 1, color);
     return othello_map;
 }
+console.log(circle_reversing(1,6,2));
