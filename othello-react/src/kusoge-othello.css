@@ -63,9 +63,8 @@ body{
   .next {
     display: block;
     width: 100px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
+    position: fixed;
+    top: 350px;
     background-color: #80aba9;
     border-collapse: collapse;
   }
@@ -78,9 +77,21 @@ body{
   }
   .pass {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 300px;
+    position: fixed;
+    top: 200px;
+    width: 150px;
+    height: 40px;
+    box-shadow: 3px 3px 3px black;
+    color: white;
+    background-color: #96514d;
+    border: 0px;
+    font-size: 1.7vw;
+  }
+  .reset {
+    display: block;
+    position: fixed;
+    top: 250px;
+    width: 150px;
     height: 40px;
     box-shadow: 3px 3px 3px black;
     color: white;
