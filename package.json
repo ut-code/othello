@@ -1,5 +1,22 @@
 {
   "dependencies": {
     "express": "^4.18.1"
-  }
+  },
+  "name": "othello",
+  "description": "a",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ut-code/othello.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ut-code/othello/issues"
+  },
+  "homepage": "https://github.com/ut-code/othello#readme"
 }
