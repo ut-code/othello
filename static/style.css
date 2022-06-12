@@ -101,3 +101,15 @@ div.main {
     text-align: center;
     cursor: pointer;
 }
+
+a{
+    font-weight: bold;
+    font-size: 20px;
+    padding:25px;
+ }
+ .mode{
+     text-align:center;
+ }
+ a:hover {
+     opacity : 0.6;
+ }
