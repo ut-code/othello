@@ -38,12 +38,15 @@ async function get(pass) {
     }
     let finish=false;
     if(white===0){
+        clearInterval(loop)
         alert("黒の勝ちです")
         finish=true;
     }else if(black===0){
+        clearInterval(loop)
         alert("白の勝ちです")
         finish=true;
     }else if(turn === 60){
+        clearInterval(loop)
         if(black>white){
             alert("黒の勝ちです")
         }else if(black<white){
@@ -56,6 +59,7 @@ async function get(pass) {
     if(finish===true){
         const response = await fetch(`/reset`);
     }
+    console.log(turn)
 }
 //おく処理
 async function put() {
@@ -164,6 +168,7 @@ const main=async() =>{
     }
 }
 main()
+loop=setInterval(get,300,false)
 
 //ボタンを押された時
 function button_click(i,j){
@@ -243,7 +248,6 @@ function reverse_up(pos_x, pos_y, color){
         reverse_up(pos_x-1, pos_y, color);
     }
     if(pos_x >= 1 && used_map[pos_x][pos_y] == 1 && flag == 1) cnt+=1;
-    console.log(cnt);
     return cnt;
 }
 function reverse_down(pos_x, pos_y, color){
@@ -379,7 +383,6 @@ function common_reversing(pos_x, pos_y, color){
     reverse_down_left(pos_x + 1, pos_y - 1, color, cnt);
     initialize();
     reverse_up_left(pos_x - 1, pos_y - 1, color, cnt);
-    console.log(cnt);
     return cnt;
 }
 
@@ -390,7 +393,6 @@ function check_putable(list,color){
             if(othello_map[i][j] == 1 || othello_map[i][j] == 2 || othello_map[i][j] == 3){
                 putable[i][j] = false;
             }else{
-                console.log([i,j]);
                 if(common_reversing(i, j, color) > 0){
                     putable[i][j] = true;
                 }else{
@@ -399,6 +401,5 @@ function check_putable(list,color){
             }
         }
     }
-    console.log(color);
     return putable;
 }
