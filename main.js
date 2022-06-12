@@ -311,6 +311,7 @@ app.get("/put", (request, response) => {
     }else {
         color = 1;
     }
+    turn++;
     response.json([othello_map, color]);
 });
 app.get("/circle_put", (request, response) =>{
@@ -332,8 +333,11 @@ app.get("/circle_put", (request, response) =>{
 });
 
 app.get("/pass", (request, response) => {
-    pass=true;
-    response.send(color)
+    if(color == 1){
+        color = 2;
+    }else {
+        color = 1;
+    }
 });
 
 app.get("/reset", (request, response) => {
